@@ -4,9 +4,10 @@ This is a Patient Management System built using FastAPI for the backend and Jinj
 To run this application on a local setting, follow these steps:
 1. Clone the repository.
 2. Pull the repository to local environment.
-3. Install the dependencies in Requirements.txt file using command: `pip install -r requirements.txt`.
-4. cd to FastAPI directory.
-5. Run the command: `uvicorn main:app --reload` to start the application.
-6. The application will start running on localhost. Go to `/docs` to check the endpoints.
+3. Start your virtual environment.
+4. Install the dependencies in Requirements.txt file using command: `pip install -r requirements.txt`.
+5. cd to FastAPI directory.
+6. Run the command: `uvicorn main:app --reload` to start the application.
+7. The application will start running on localhost. Go to `/docs` to check the endpoints.
 
 I have made this application from scratch and tried my level best to keep the front end user-friendly and code easily understandable. I hope you will enjoy the project!!
