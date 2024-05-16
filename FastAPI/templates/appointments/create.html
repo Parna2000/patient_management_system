@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Create Appointment{% endblock %}
+
+{% block content %}
+<div class="px-4 py-5 my-5 text-center">
+    <h1 class="display-5 fw-bold text-body-emphasis">Create New Appointment</h1>
+    <h4 class="display-5 fw-bold text-body-emphasis">Patient name: {{patient.name}}</h4>
+  <p class="lead mb-4">Enter the details of the new appointment to be created</p>
+    <div class="col-lg-6 mx-auto">
+        <div class="lead mb-4">
+            <form action="/appointments/{{ patient.id }}/create" method="post">
+                <div class="mb-3">
+                    <label for="doctor_name" class="form-label">Doctor name:</label>
+                    <input type="text" id="doctor_name" name="doctor_name" minlength="5" required>
+                </div>
+                <div class="mb-3">
+                    <label for="date" class="form-label">Date: </label>
+                    <input type="date" id="date" name="date" required>
+                </div>
+                <div class="mb-3">
+                    <label for="time" class="form-label">Time: </label>
+                    <input type="time" id="time" name="time" required>
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description:</label>
+                    <textarea class="form-control" id="description" rows="3" name="description" minlength="20"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-lg px-4 gap-3">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{% if error %}
+<script type="text/javascript">
+    Toastify({
+        text: "{{ error }}",
+        duration: 5000,
+        close: true,
+        gravity: "top",
+        position: "right",
+        backgroundColor: "linear-gradient(to right, #FF5F6D, #FFC371)",
+    }).showToast();
+</script>
+{% endif %}
+{% endblock %}

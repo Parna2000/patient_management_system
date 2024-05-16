@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="px-4 py-5 my-5 text-center">
+    <h1 class="display-5 fw-bold text-body-emphasis">Login</h1>
+  <p class="lead mb-4">Enter your details</p>
+    <div class="col-lg-6 mx-auto">
+        <div class="lead mb-4">
+            <form action="/patients/create" method="post">
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password:</label>
+                    <input type="text" id="password" name="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-lg px-4 gap-3">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{% if error %}
+<script type="text/javascript">
+    Toastify({
+        text: "{{ error }}",
+        duration: 5000,
+        close: true,
+        gravity: "top",
+        position: "right",
+        backgroundColor: "linear-gradient(to right, #FF5F6D, #FFC371)",
+    }).showToast();
+</script>
+{% endif %}
+{% endblock %}

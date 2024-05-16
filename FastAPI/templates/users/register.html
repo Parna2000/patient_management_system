@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+<div class="px-4 py-5 my-5 text-center">
+    <h1 class="display-5 fw-bold text-body-emphasis">Register</h1>
+  <p class="lead mb-4">Enter your details</p>
+    <div class="col-lg-6 mx-auto">
+        <div class="lead mb-4">
+            <form action="/users/register" method="post">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name:</label>
+                    <input type="text" id="name" name="name" minlength="5" required>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password:</label>
+                    <input type="password" id="password" name="password" minlength="8" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-lg px-4 gap-3">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{% if error %}
+<script type="text/javascript">
+    Toastify({
+        text: "{{ error }}",
+        duration: 5000,
+        close: true,
+        gravity: "top",
+        position: "right",
+        backgroundColor: "linear-gradient(to right, #FF5F6D, #FFC371)",
+    }).showToast();
+</script>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="px-4 py-5 my-5 text-center">
+    <h1 class="display-5 fw-bold text-body-emphasis">Patient Management System</h1>
+    <div class="col-lg-6 mx-auto">
+      <p class="lead mb-4">This is a Patient Management System built using FastAPI for the backend and Jinja2 for server-side rendering of HTML templates. It includes features for managing patients, appointments, and users, with endpoints to create, read, update, and delete records. The system ensures data validation, user authentication, and secure password handling. The project aims to provide an efficient, user-friendly interface for handling patient and appointment information in a healthcare setting.</p>
+      <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+        <button type="button" class="btn btn-primary btn-lg px-4 gap-3"><a class="nav-link" href="/users/register">Register</a></button>
+        <button type="button" class="btn btn-outline-secondary btn-lg px-4"><a class="nav-link" href="/users/login">Login</a></button>
+      </div>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}Patient Details{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">{{ patient.name }}</h5>
+        <p class="card-text"><b>Email:</b> {{ patient.email }}</p>
+        <p class="card-text"><b>Phone:</b> {{ patient.phone }}</p>
+        <div class="d-inline-flex gap-1">
+            <a class="btn btn-info" href="/appointments/{{ patient.id }}/create" style="text-decoration: none; color: white">Add Appointment</a>
+            <a class="btn btn-primary" href="/patients/{{ patient.id }}/update" style="text-decoration: none; color: white">Update Patient</a>
+            <form action="/patients/{{ patient.id }}/delete" method="post" style="display:inline;">
+                <button class="btn btn-danger" type="submit">Delete Patient</button>
+            </form>
+        </div>
+
+        <h5 style="margin-top: 15px">Appointments</h5>
+        {% if patient.appointments|length < 1 %}
+            <div class="card">
+              <div class="card-body">
+                No appointments to display.
+              </div>
+            </div>
+        {% else %}
+            {% for appointment in patient.appointments %}
+                <div class="card">
+                    <div class="card-body">
+                        <h6 class="card-title"><b>Doctor name:</b> {{appointment.doctor_name}}</h6>
+                        <p class="card-text"><b>Date:</b> {{appointment.date}}</p>
+                        <p class="card-text"><b>Time:</b> {{appointment.time}}</p>
+                        <p class="card-text"><b>Description:</b> {{appointment.description}}</p>
+                        <div class="d-inline-flex gap-1">
+                            <a class="btn btn-info" href="{{appointment.payment_link}}" style="text-decoration: none; color: white">Payment Link</a>
+                            <a class="btn btn-primary" href="/appointments/{{appointment.id}}/update" style="text-decoration: none; color: white">Update Appointment</a>
+                            <form action="/appointments/{{ appointment.id }}/delete" method="post" style="display:inline;">
+                                <button type="submit" class="btn btn-danger">Delete Appointment</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{% if error %}
+<script type="text/javascript">
+    Toastify({
+        text: "{{ error }}",
+        duration: 5000,
+        close: true,
+        gravity: "top",
+        position: "right",
+        backgroundColor: "linear-gradient(to right, #FF5F6D, #FFC371)",
+    }).showToast();
+</script>
+{% endif %}
+{% endblock %}

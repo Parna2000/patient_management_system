@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %}Patient List{% endblock %}
+
+{% block content %}
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Patients</h5>
+    <p class="card-text">This is list of patients registered in our system. For complete details of any patient, click on the 'details' button on the right of that user.</p>
+
+    <div class="d-inline-flex gap-1">
+        <a href="/patient/create" class="btn btn-info" style="color: white">Create New Patient</a>
+        <form action="/patients/name/" class="d-flex" method="get">
+          <input class="form-control me-2" type="text" placeholder="Type name" name="name">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+    </div>
+  </div>
+</div>
+
+{% if patients|length < 1 %}
+  <div class="card">
+    <div class="card-body">
+      No patients to display.
+    </div>
+  </div>
+{% else %}
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th scope="col">id</th>
+        <th scope="col">Name</th>
+        <th scope="col">Phone</th>
+        <th scope="col">Email</th>
+          <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for patient in patients %}
+      <tr>
+        <th scope="row">{{ patient.id }}</th>
+        <td>{{ patient.name }}</td>
+        <td>{{ patient.phone }}</td>
+        <td>{{ patient.email }}</td>
+          <td><button type="button" class="btn btn-info"><a href="/patients/{{ patient.id }}" style="text-decoration: none; color: white">Details</a></button></td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+{% endif %}
+{% endblock %}
+
+
+{% block scripts %}
+{% if error %}
+<script type="text/javascript">
+    Toastify({
+        text: "{{ error }}",
+        duration: 5000,
+        close: true,
+        gravity: "top",
+        position: "right",
+        backgroundColor: "linear-gradient(to right, #FF5F6D, #FFC371)",
+    }).showToast();
+</script>
+{% endif %}
+{% endblock %}

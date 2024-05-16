@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}Appointment List{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Appointments</h5>
+        <p class="card-text">Here's a list of all the appointments of different patients.</p>
+    </div>
+</div>
+{% if appointments|length < 1 %}
+    <div class="card">
+      <div class="card-body">
+        No appointments to display.
+      </div>
+    </div>
+{% else %}
+    {% for appointment in appointments %}
+        <div class="card">
+            <div class="card-body">
+                <h6 class="card-title"><b>Doctor name:</b> {{appointment.doctor_name}}</h6>
+                <p class="card-text"><b>Patient name:</b> {{appointment.patient.name}}</p>
+                <p class="card-text"><b>Date and Time:</b> {{appointment.date}}</p>
+                <p class="card-text"><b>Description:</b> {{appointment.description}}</p>
+                <div class="d-inline-flex gap-1">
+                    <a class="btn btn-info" href="{{appointment.payment_link}}"
+                        style="text-decoration: none; color: white">Payment Link</a>
+                    <a class="btn btn-primary" href="/appointments/{{appointment.id}}/update"
+                        style="text-decoration: none; color: white">Update Appointment</a>
+                    <form action="/appointments/{{appointment.id}}/delete" method="post" style="display:inline;">
+                        <button type="submit" class="btn btn-danger">Delete Appointment</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endif %}
+{% endblock %}
+
+{% block scripts %}
+{% if error %}
+<script type="text/javascript">
+    Toastify({
+        text: "{{ error }}",
+        duration: 5000,
+        close: true,
+        gravity: "top",
+        position: "right",
+        backgroundColor: "linear-gradient(to right, #FF5F6D, #FFC371)",
+    }).showToast();
+</script>
+{% endif %}
+{% endblock %}
